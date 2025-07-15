@@ -20,15 +20,15 @@ local random = Random.new()
 --// Configuration
 local DEBUG = false
 local tpAmt
-local vif useroid = CFrame.new(0, -3.4028234663852886e+38, 0)
+local void = CFrame.new(0, -3.4028234663852886e+38, 0)
 local teleporting
 
 local function DebugInfo(mode, content, value)
     if not DEBUG then return end
     if mode == "warn" then
-        warn("[BFHUB DEBUG]:", content, value or "")
+        warn("[BFHUBTP DEBUG]:", content, value or "")
     elseif mode == "print" then
-        print("[BFHUB DEBUG]:", content, value or "")
+        print("[BFHUBTP DEBUG]:", content, value or "")
     else
         warn("[BFHUBTP DEBUG]: Invalid debug type.")
     end
@@ -335,7 +335,7 @@ local function TweenSteal(statusLabel)
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "BFHUBTPGui"
+ScreenGui.Name = "ArbixTPGui"
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.DisplayOrder = 999
@@ -343,7 +343,7 @@ ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 DebugInfo("print", "BFHUBTPGui created", ScreenGui.Name)
 
 local Blur = Instance.new("BlurEffect")
-Blur.Name = "ArbixTPBlur"
+Blur.Name = "BFHUBTPBlur"
 Blur.Size = 0
 Blur.Parent = workspace
 DebugInfo("print", "BFHUBTPBlur created", Blur.Name)
@@ -411,7 +411,7 @@ TitleLabel.BackgroundTransparency = 1
 TitleLabel.Size = UDim2.new(1, -80, 1, 0)
 TitleLabel.Position = UDim2.new(0, 15, 0, 0)
 TitleLabel.Font = Enum.Font.GothamBlack
-TitleLabel.Text = "BF HUB TP"
+TitleLabel.Text = "BFHUB TP"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.TextSize = 20
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -672,7 +672,7 @@ MinimizeButton.MouseButton1Click:Connect(function()
         TextTransparency = contentTransparency
     }):Play()
     
-    MinimizeButton.Text = isMinimized and "â-i" or "â€"
+    MinimizeButton.Text = isMinimized and "â–¡" or "â€”"
     DebugInfo("print", "Minimize toggled", isMinimized and "Minimized" or "Restored")
 end)
 
@@ -685,7 +685,7 @@ CloseButton.MouseButton1Click:Connect(function()
     task.wait(0.4)
     ScreenGui:Destroy()
     Blur:Destroy()
-    DebugInfo("print", "BF HUB TPGui closed", "")
+    DebugInfo("print", "ArbixTPGui closed", "")
 end)
 
 local isGuiVisible = true
@@ -725,7 +725,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
                 TweenService:Create(TweenStealStroke, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
                 TweenService:Create(StatusLabel, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
             end
-            DebugInfo("print", "BF HUB TPGui shown", "")
+            DebugInfo("print", "ArbixTPGui shown", "")
         else
             TweenService:Create(Frame, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {
                 Size = UDim2.new(0, 0, 0, 0),
@@ -773,18 +773,18 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
-DebugInfo("print", "BF HUB TP  initialization completed", "")
+DebugInfo("print", "BFHUBTPGui initialization completed", "")
 ]]
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ArbixHub"
+ScreenGui.Name = "BF Hub"
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.DisplayOrder = 999
 ScreenGui.Parent = Player:WaitForChild("PlayerGui")
 
 local Blur = Instance.new("BlurEffect")
-Blur.Name = "ArbixBlur"
+Blur.Name = "BFHUBBlur"
 Blur.Size = 0
 Blur.Parent = Lighting
 
@@ -1158,7 +1158,7 @@ end)
 SubmitButton.MouseButton1Click:Connect(function()
     local userInput = string.lower(InputBox.Text or "")
     
-    if userInput == string.lower(key) then
+    if userInput == key then
         SubmitButton.Visible = false
         GetCodeButton.Visible = false
         LoadingCircle.Visible = true
@@ -1184,7 +1184,7 @@ SubmitButton.MouseButton1Click:Connect(function()
         task.wait(0.4)
         ScreenGui:Destroy()
         Blur:Destroy()
-        print("[BF HUB]: ArbixBlur destroyed")
+        print("[BF HUB]: BFHUBBlur destroyed")
         local success, errorMsg = pcall(function()
             local func = loadstring(scriptToLoad)
             if not func then
