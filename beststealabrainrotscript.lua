@@ -1158,7 +1158,7 @@ end)
 SubmitButton.MouseButton1Click:Connect(function()
     local userInput = string.lower(InputBox.Text or "")
     
-    if userInput == key then
+    if string.upper(userInput) == string.upper(key) then
         SubmitButton.Visible = false
         GetCodeButton.Visible = false
         LoadingCircle.Visible = true
